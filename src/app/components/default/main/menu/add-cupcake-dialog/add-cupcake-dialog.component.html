@@ -1,0 +1,32 @@
+<mat-toolbar class="mat-dialog-header" fxLayoutAlign="space-between center">
+    <span class="flex-auto ml-2">Adicionar cupcake</span>
+    <button mat-icon-button id="close" [mat-dialog-close]="false" tabindex="-1">
+        <mat-icon>close</mat-icon>
+    </button>
+</mat-toolbar>
+
+<mat-dialog-content>
+    <form [formGroup]="formGroup">
+        <div fxLayout="column" fxLayoutAlign="space-evenly stretch" fxLayoutGap="16px">
+            <mat-form-field fxFlex>
+                <mat-label>Nome</mat-label>
+                <input matInput type="text" formControlName="name" required>
+                <mat-error validator></mat-error>
+            </mat-form-field>
+            <mat-form-field fxFlex>
+                <mat-label>Preço</mat-label>
+                <input matInput type="text" formControlName="price" [maxLength]="64" required mask="separator.2" thousandSeparator="." decimalMarker="," prefix="R$ ">
+                <mat-error validator></mat-error>
+            </mat-form-field>
+        </div>
+    </form>
+</mat-dialog-content>
+
+<mat-dialog-actions fxLayout="row" fxLayout.sm="column" fxLayout.xs="column" fxLayoutAlign="center center" fxLayoutGap="8px" class="padding-actions">
+    <button class="w-auto" mat-stroked-button id="cancel" type="button" (click)="close()">
+        Cancelar
+    </button>
+    <button mat-raised-button type="submit" color="accent" [disabled]="!this.formGroup.valid" (click)="save()">
+        Salvar
+    </button>
+</mat-dialog-actions>

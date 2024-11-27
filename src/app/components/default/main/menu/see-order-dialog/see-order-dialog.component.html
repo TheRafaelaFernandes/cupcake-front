@@ -1,0 +1,46 @@
+<mat-toolbar class="mat-dialog-header" fxLayoutAlign="space-between center">
+    <span class="flex-auto ml-2">Pedido</span>
+    <button mat-icon-button id="close" [mat-dialog-close]="false" tabindex="-1">
+        <mat-icon>close</mat-icon>
+    </button>
+</mat-toolbar>
+
+<mat-dialog-content>
+    <div *ngIf="cartItems.length > 0; else noItems">
+        <div *ngFor="let item of cartItems" >
+            <mat-card fxFlex="380px" fxLayout="row" fxLayoutAlign="space-between start">
+                <div>
+                    <h3>{{ item.name }}</h3>
+                    <p>Preço: {{ item?.["price"] | currency:'BRL':'symbol':'1.2-2' }}</p>
+                    <p>Quantidade: {{ item?.["quantity"] }}</p>
+                </div>
+                <div fxLayout="row" fxLayoutAlign="start center">
+                    <button mat-icon-button (click)="decreaseQuantity(item)" matTooltip="Adicionar">
+                        <mat-icon>remove_circle</mat-icon>
+                    </button>
+                    <p style="margin: 0 10px;">{{ item?.["quantity"] }}</p>
+                    <button mat-icon-button (click)="increaseQuantity(item)" matTooltip="Excluiir">
+                        <mat-icon>add_circle</mat-icon>
+                    </button>
+                </div>
+            </mat-card>
+
+            <mat-divider/>
+        </div>
+    </div>
+    <div class="total-price" *ngIf="this.cartItems.length >= 1">
+        <h3>Total: {{ getTotalPrice() | currency:'BRL' }}</h3>
+    </div>
+    <ng-template #noItems>
+        <p>Seu carrinho esta vazio</p>
+    </ng-template>
+</mat-dialog-content>
+
+<mat-dialog-actions fxLayout="row" fxLayout.sm="column" fxLayout.xs="column" fxLayoutAlign="center center" fxLayoutGap="8px" class="padding-actions">
+    <button class="w-auto" mat-stroked-button id="cancel" type="button" (click)="close()">
+        Cancelar
+    </button>
+    <button mat-raised-button type="submit" color="accent" [disabled]="this.cartItems.length < 1" (click)="finalizeOrder()">
+        Finalizar pedido
+    </button>
+</mat-dialog-actions>

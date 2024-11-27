@@ -1,0 +1,31 @@
+<mat-toolbar class="mat-dialog-header" fxLayoutAlign="space-between center">
+    <span class="flex-auto ml-2">Meus pedidos</span>
+    <button mat-icon-button id="close" [mat-dialog-close]="false" tabindex="-1">
+        <mat-icon>close</mat-icon>
+    </button>
+</mat-toolbar>
+
+<mat-dialog-content>
+    <div *ngIf="orders.length > 0; else noItems">
+        <div *ngFor="let order of orders" class="order-card">
+            <p>Cupcake: {{ order['cupcake'].name  }}</p>
+            <ul>
+                <li>
+                    <strong>Quantidade:</strong> {{ order['cupcake_order']['quantity'] }} -
+                    <strong>Preço Unitário:</strong> {{ order['cupcake']['price'] | currency:'BRL' }}
+                </li>
+            </ul>
+            <h3>{{ order.order?.['id'] }} - Total: {{ order.order?.['total_amount'] | currency:'BRL' }}</h3>
+            <mat-divider/>
+        </div>
+    </div>
+    <ng-template #noItems>
+        <p>Faça o seu primeiro pedido</p>
+    </ng-template>
+</mat-dialog-content>
+
+<mat-dialog-actions fxLayout="row" fxLayout.sm="column" fxLayout.xs="column" fxLayoutAlign="center center" fxLayoutGap="8px" class="padding-actions">
+    <button class="w-auto" mat-stroked-button id="cancel" type="button" (click)="close()">
+        Fechar
+    </button>
+</mat-dialog-actions>

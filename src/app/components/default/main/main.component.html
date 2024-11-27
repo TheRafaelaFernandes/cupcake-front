@@ -1,0 +1,68 @@
+<div class="main" fxLayout="column" fxLayoutAlign="start stretch">
+
+    <mat-toolbar fxFlex="64px" class="main-header">
+        <div fxLayoutAlign="start center" class="logo" [routerLink]="['/basic/home/']">
+            <img class="click" ngSrc="assets/icons/cupcake.svg" alt="" height="50" width="50">
+            <img class="click" ngSrc="assets/icons/cupcake-black.svg" alt="" height="50" width="50">
+            <img class="click" ngSrc="assets/icons/cupcake-colors.svg" alt="" height="50" width="50">
+            <img class="click" ngSrc="assets/icons/cupcake.svg" alt="" height="50" width="50">
+            <span style="margin-left: 20px">Cupcake shop</span>
+            <div class="symbol-logo click" *ngIf="isExpanded"></div>
+            <span class="logotype"></span>
+        </div>
+
+        <div fxFlex></div>
+
+        <div>
+            <button mat-button color="accent" style="color: white" [matMenuTriggerFor]="matMenu">
+                <mat-icon class="fas fa-user"></mat-icon>
+                <span>{{user?.["username"]}}</span>
+            </button>
+            <mat-menu #matMenu="matMenu">
+                <mat-card class="user-card">
+                    <mat-card-header>
+                        <div mat-card-avatar>
+                            <mat-icon>account_circle</mat-icon>
+                        </div>
+                        <mat-card-title>
+                            <strong>{{user?.["username"]}}</strong>
+                        </mat-card-title>
+                        <mat-card-subtitle>{{user?.["name"]}}</mat-card-subtitle>
+                    </mat-card-header>
+                </mat-card>
+                <mat-divider></mat-divider>
+                <mat-divider></mat-divider>
+                <button mat-menu-item (click)="logout()">
+                    <mat-icon>exit_to_app</mat-icon>
+                    <span>Sair</span>
+                </button>
+            </mat-menu>
+        </div>
+    </mat-toolbar>
+
+    <mat-sidenav-container fxFlex="calc(100% - 64px)" class="main-container" (window:resize)="onResize($event)">
+        <mat-sidenav mode="side" [opened]="true" [disableClose]="true" [@sidenavIsExpanded]="isExpanded">
+            <app-menu [showLabel]="isExpanded"></app-menu>
+        </mat-sidenav>
+
+        <mat-sidenav-content cdkScrollable fxLayout="column" fxLayoutAlign="start stretch" [@sidenavContentIsExpanded]="isExpanded">
+
+            <mat-toolbar class="container-header mat-elevation-z2" fxFlex="54px" fxLayoutAlign="start center">
+                <button mat-icon-button color="primary" (click)="isExpanded = !isExpanded">
+                    <mat-icon>menu</mat-icon>
+                </button>
+                <button matTooltip="Voltar" mat-icon-button color="primary"
+                        (click)="location.back()" *ngIf="title">
+                    <mat-icon>arrow_back</mat-icon>
+                </button>
+                <div><span class="title">{{title}}</span></div>
+            </mat-toolbar>
+
+            <div class="container" fxFlex>
+                <router-outlet></router-outlet>
+            </div>
+        </mat-sidenav-content>
+
+    </mat-sidenav-container>
+
+</div>

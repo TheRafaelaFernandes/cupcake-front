@@ -1,0 +1,187 @@
+@use "@angular/material" as mat;
+@import "@fortawesome/fontawesome-free/css/all.css";
+
+mat.$theme-ignore-duplication-warnings:true
+
+;
+
+$custom-typography: mat.m2-define-typography-config(
+    $button: mat.m2-define-typography-level(12px, 14px, 500),
+);
+
+$primary: mat.m2-define-palette(mat.$m2-light-green-palette, 500);
+$accent: mat.m2-define-palette(mat.$m2-light-green-palette, 500);
+$warn: mat.m2-define-palette(mat.$m2-red-palette);
+$theme: mat.m2-define-light-theme((
+        color: (
+                primary: $primary,
+                accent: $accent,
+                warn: $warn,
+        ),
+        typography: $custom-typography
+));
+
+
+@include mat.all-component-themes($theme);
+@include mat.core-theme($theme);
+
+@include mat.all-component-typographies($custom-typography);
+@include mat.core();
+
+html, body, .main {
+    margin: 0;
+    height: 100%;
+}
+
+mat-form-field {
+
+    .mat-form-field-infix {
+        width: auto;
+    }
+    .mat-mdc-text-field-wrapper .mat-mdc-form-field-flex .mat-mdc-floating-label {
+        top: 20px;
+    }
+
+    .mat-mdc-text-field-wrapper, .mdc-text-field, .mdc-text-field--outlined {
+        height: 40px;
+
+        .mat-mdc-form-field-infix {
+            padding-top: 8px !important;
+            padding-bottom: 8px !important;
+            height: 40px !important;
+            min-height: 40px;
+
+            input {
+                height: 24px !important;
+            }
+        }
+
+        .mat-mdc-form-field-icon-suffix {
+            app-autocomplete-control {
+                display: flex;
+                justify-content: flex-end;
+                min-width: 150px;
+            }
+        }
+
+    }
+
+}
+
+mat-card {
+    padding: 16px;
+}
+
+.login {
+    background: url("../images/bg-login.jpg") no-repeat bottom center fixed;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+
+}
+
+.mat-success {
+    color: #FFFFFF !important;
+    background-color: #4caf50 !important;
+
+    &:disabled {
+        background-color: rgba(0, 0, 0, .12) !important;
+    }
+}
+
+.mat-info {
+    color: #FFFFFF !important;
+    background-color: #2196f3 !important;
+
+    &:disabled {
+        background-color: rgba(0, 0, 0, .12) !important;
+    }
+}
+
+.mat-danger {
+    background-color: #ff5151 !important;
+    color: #ffffff !important;
+
+    &:disabled {
+        background-color: rgba(0, 0, 0, .12) !important;
+    }
+}
+
+.mat-tooltip {
+    font-size: 12px;
+}
+
+.file_input {
+    box-sizing: border-box;
+    position: relative;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    cursor: pointer;
+    outline: 0;
+    -webkit-tap-highlight-color: transparent;
+    white-space: nowrap;
+    text-decoration: none;
+    vertical-align: baseline;
+    text-align: center;
+    line-height: 38px;
+    padding: 0 16px 0 8px;
+    border-radius: 4px;
+    background-color: transparent;
+    transform: translate3d(0, 0, 0);
+    transition: background .4s cubic-bezier(.25, .8, .25, 1), box-shadow 280ms cubic-bezier(.4, 0, .2, 1);
+
+    &:hover {
+        background-color: #F1EBEF;
+    }
+
+    &.disabled {
+        background-color: #e0e0e0;
+        color: #ffffff;
+        box-shadow: none;
+        border: 1px solid #e0e0e0;
+    }
+
+    span {
+        cursor: pointer;
+        margin-right: 5px;
+    }
+}
+
+.no-subscript .mat-mdc-form-field-subscript-wrapper {
+    display: none;
+}
+
+.mdc-button__label {
+    font-size: 14px;
+    white-space: pre;
+}
+
+.mat-mdc-form-field {
+    display: flex !important;
+    flex-direction: column-reverse !important;
+}
+
+.tooltip-list {
+    white-space: pre;
+    background-color: #FFFFFF !important;
+    text-align: left !important;
+}
+
+.mat-mdc-form-field-error {
+    position: absolute;
+    padding: 0 5px;
+    width: auto !important;
+    margin-top: 0;
+    top: -14px;
+    right: 0;
+    color: white !important;
+    background: #ff5151;
+    border-radius: 4px;
+}
+
+.mat-mdc-form-field-subscript-wrapper, .mat-mdc-form-field-bottom-align::before {
+    height: 1px;
+}

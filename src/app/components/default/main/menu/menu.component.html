@@ -1,0 +1,21 @@
+<div fxFlex class="menu-item" fxLayout="column">
+    <div fxFlex fxLayout="row" fxLayoutAlign="start center" class="item" (click)="openDialogSeeOrder()" *ngIf="!user?.['superuser']">
+        <img class="click" ngSrc="assets/icons/add-to-cart.svg" alt="" height="25" width="30">
+        <span>Pedido</span>
+    </div>
+    <mat-divider/>
+    <div fxFlex fxLayout="row" fxLayoutAlign="space-evenly stretch" class="item" (click)="openDialogMyOrders()" *ngIf="!user?.['superuser']">
+        <img class="click" ngSrc="assets/icons/shopping-bag.svg" alt="" height="25" width="30">
+        <span>Meus pedidos</span>
+    </div>
+    <mat-divider/>
+    <div fxFlex fxLayout="row" fxLayoutAlign="space-evenly stretch" class="item" (click)="openDialogMyFavorites()" *ngIf="!user?.['superuser']">
+        <img class="click" ngSrc="assets/icons/heart.svg" alt="" height="25" width="30">
+        <span>Meus favoritos</span>
+    </div>
+    <mat-divider/>
+    <div fxFlex fxLayout="row" fxLayoutAlign="space-evenly stretch" class="item" (click)="openDialogAddCupcake()" *ngIf="user?.['superuser']">
+        <img class="click" ngSrc="assets/icons/cupcake%20-add.svg" alt="" height="25" width="30">
+        <span>Add cupcake</span>
+    </div>
+</div>

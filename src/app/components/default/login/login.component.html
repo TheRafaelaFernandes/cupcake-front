@@ -1,0 +1,43 @@
+<div fxFill class="login" fxLayout="column" fxLayoutAlign="center center">
+
+    <form [formGroup]="formGroup">
+        <mat-card fxFlex="380px" class="mat-elevation-z12">
+            <div mat-card-image fxLayoutAlign="center center" fxLayout="column">
+                <div fxLayoutAlign="start center" class="logo">
+                    <div class="symbol-logo"></div>
+                    <span class="logotype"></span>
+                </div>
+            </div>
+
+            <mat-card-content>
+                <div fxLayout="column" fxLayoutAlign="space-evenly stretch" fxLayoutGap="10px">
+                    <div fxLayout="column" fxLayoutGap="16px">
+                        <mat-form-field fxFlex>
+                            <mat-label>Usuário</mat-label>
+                            <input matInput type="text" maxlength="64" formControlName="username" required autoFocus>
+                            <mat-error validator></mat-error>
+                        </mat-form-field>
+
+                        <mat-form-field fxFlex>
+                            <mat-label>Senha</mat-label>
+                            <input matInput type="password" minlength="4" maxlength="64" formControlName="password"
+                                   required>
+                            <mat-error validator></mat-error>
+                        </mat-form-field>
+                    </div>
+                    <div fxLayout="column" fxLayoutAlign="space-evenly stretch">
+                        <button mat-button mat-raised-button type="submit" color="accent" [disabled]="!formGroup.valid"
+                                (click)="login()">
+                            Entrar
+                        </button>
+                    </div>
+                    <div fxLayout="column" fxLayoutAlign="space-evenly stretch">
+                        <button mat-button mat-raised-button type="submit" color="accent" (click)="openDialogCreateUSer()">
+                            Criar usuário
+                        </button>
+                    </div>
+                </div>
+            </mat-card-content>
+        </mat-card>
+    </form>
+</div>

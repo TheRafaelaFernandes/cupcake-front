@@ -1,0 +1,30 @@
+<div fxFlex fxLayout="column" fxLayoutAlign="center center" class="min-h-full">
+    <div fxFlex class="content">
+        <div fxLayout="column" fxLayoutAlign="center center" fxLayoutGap="16px">
+            <span>Bem-vindo ao mundo dos cupcakes perfeitos! Aqui, cada mordida é um momento de felicidade.</span>
+            <span>Escolha o seu sabor favorito e deixe seu dia mais doce!</span>
+        </div>
+        <div *ngIf="cupcakesList?.length > 0; else noItems" class="module-list">
+            <a *ngFor="let cupcake of cupcakesList" class="module mat-elevation-z4">
+                <div>
+                    <img src="../../../../assets/images/cupcake.jpg" width="200px" alt="">
+                    <h3>{{ cupcake["name"] }}</h3>
+                    <h4>Preço : {{ cupcake["price"] | currency:'BRL':'symbol':'1.2-2' }}</h4>
+                </div>
+                <div fxLayout="row" fxLayoutAlign="center center">
+                    <button mat-button mat-raised-button type="button" color="accent" (click)="addToCart(cupcake)" *ngIf="!user?.['superuser']">
+                        Adicionar ao pedido
+                    </button>
+                    <mat-icon *ngIf="!cupcake?.['is_favorite'] && !user?.['superuser']" (click)="addFavorite(cupcake, false)" matTooltip="Adicionar em favoritos">favorite_border</mat-icon>
+                    <mat-icon *ngIf="cupcake?.['is_favorite'] && !user?.['superuser']" (click)="addFavorite(cupcake, true)" matTooltip="Remover de favoritos">favorite</mat-icon>
+                </div>
+            </a>
+        </div>
+        <ng-template #noItems>
+            <div fxLayout="column" fxLayoutAlign="center center" class="no-items-message">
+                <h4>Nenhum item disponível no momento. Por favor, volte mais tarde!</h4>
+            </div>
+        </ng-template>
+    </div>
+</div>
+
