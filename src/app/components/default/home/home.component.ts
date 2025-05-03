@@ -57,7 +57,7 @@ export class HomeComponent implements OnInit{
         const cart = JSON.parse(this.storage.getItem("cart") || "[]");
         cart.push(cupcake);
         this.storage.setItem("cart", JSON.stringify(cart));
-        this.toast.success("Item adicionado com sucesso", "Sucesso");
+        this.toast.success("Cupcake adicionado com sucesso", "Sucesso");
     }
 
     public addFavorite(cupcake: any, isFavorite): void {
@@ -69,11 +69,24 @@ export class HomeComponent implements OnInit{
             next: () => {
                 cupcake.is_favorite = !isFavorite;
                 !isFavorite ?
-                    this.toast.success("Item adicionado com sucesso", "Sucesso"):
-                    this.toast.success("Item removido com sucesso", "Sucesso");
+                    this.toast.success("Cupcake adicionado com sucesso", "Sucesso"):
+                    this.toast.success("Cupcake removido com sucesso", "Sucesso");
             },
             error: (err) => console.error('Erro ao adicionar aos favoritos', err)
         });
     }
+
+    public deleteCupcake(cupcake: any): void {
+        const payload = { cupcake_id: cupcake.id };
+
+        this.http.post(`${this.urlCupcake}/inactivate`, payload).subscribe({
+            next: () => {
+                this.toast.success("Cupcake deletado com sucesso", "Sucesso");
+                this.getCupcake();
+            },
+            error: (err) => console.error('Erro ao deletar cupcake', err)
+        });
+    }
+
 
 }

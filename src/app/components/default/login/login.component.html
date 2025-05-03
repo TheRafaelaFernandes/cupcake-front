@@ -15,19 +15,21 @@
                         <mat-form-field fxFlex>
                             <mat-label>Usuário</mat-label>
                             <input matInput type="text" maxlength="64" formControlName="username" required autoFocus>
-                            <mat-error validator></mat-error>
+                            <mat-error *ngIf="formGroup.get('username')?.hasError('required')">
+                                Campo obrigatório
+                            </mat-error>
                         </mat-form-field>
 
                         <mat-form-field fxFlex>
                             <mat-label>Senha</mat-label>
-                            <input matInput type="password" minlength="4" maxlength="64" formControlName="password"
-                                   required>
-                            <mat-error validator></mat-error>
+                            <input matInput type="password" minlength="4" maxlength="64" formControlName="password" required>
+                            <mat-error *ngIf="formGroup.get('password')?.hasError('required')">
+                                Campo obrigatório
+                            </mat-error>
                         </mat-form-field>
                     </div>
                     <div fxLayout="column" fxLayoutAlign="space-evenly stretch">
-                        <button mat-button mat-raised-button type="submit" color="accent" [disabled]="!formGroup.valid"
-                                (click)="login()">
+                        <button mat-button mat-raised-button type="submit" color="accent" [disabled]="!formGroup.valid" (click)="login()">
                             Entrar
                         </button>
                     </div>

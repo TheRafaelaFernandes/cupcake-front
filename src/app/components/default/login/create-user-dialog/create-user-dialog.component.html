@@ -12,23 +12,35 @@
                 <mat-form-field fxFlex>
                     <mat-label>Nome</mat-label>
                     <input matInput type="text" formControlName="name" required>
-                    <mat-error validator></mat-error>
+                    <mat-error *ngIf="formGroup.get('name')?.hasError('required')">
+                        Campo obrigatório
+                    </mat-error>
                 </mat-form-field>
                 <mat-form-field fxFlex>
                     <mat-label>Usuário</mat-label>
                     <input matInput type="text" formControlName="username" required>
-                    <mat-error validator></mat-error>
+                    <mat-error *ngIf="formGroup.get('username')?.hasError('required')">
+                        Campo obrigatório
+                    </mat-error>
                 </mat-form-field>
             </div>
             <mat-form-field>
                 <mat-label>E-mail</mat-label>
                 <input matInput type="text" maxlength="256" formControlName="email" required>
-                <mat-error validator></mat-error>
+                <mat-error *ngIf="formGroup.get('email')?.hasError('required')">
+                    Campo obrigatório
+                </mat-error>
+                <mat-error *ngIf="formGroup.get('email')?.hasError('email') && !formGroup.get('email')?.hasError('required')">
+                    Insira um e-mail válido
+                </mat-error>
             </mat-form-field>
+
             <mat-form-field fxFlex>
                 <mat-label>Senha</mat-label>
                 <input matInput type="text" formControlName="password" required>
-                <mat-error validator></mat-error>
+                <mat-error *ngIf="formGroup.get('password')?.hasError('required')">
+                    Campo obrigatório
+                </mat-error>
             </mat-form-field>
         </div>
     </form>

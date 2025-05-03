@@ -18,11 +18,10 @@ export class AddCupcakeDialogComponent extends BaseComponent<Cupcake> implements
     public object: Cupcake = new Cupcake();
     private readonly urlBase: string;
     private readonly urlCupcake: string;
+    selectedFile: File | null = null;
 
-    constructor(public dialogRef: MatDialogRef<AddCupcakeDialogComponent>,
-                private cupcakeService: CupcakeService,
-                public injector: Injector,
-                @Inject(MAT_DIALOG_DATA) public data: any) {
+    constructor(public dialogRef: MatDialogRef<AddCupcakeDialogComponent>, private cupcakeService: CupcakeService,
+                public injector: Injector, @Inject(MAT_DIALOG_DATA) public data: any) {
         super(injector, {endpoint: URLS.CUPCAKE});
         this.urlBase = environment.urlBase;
         this.urlCupcake = `${this.urlBase}${URLS.CUPCAKE}`;
@@ -31,28 +30,41 @@ export class AddCupcakeDialogComponent extends BaseComponent<Cupcake> implements
     public createFormGroup(): void {
         this.formGroup = this.formBuilder.group({
             name: [null, CustomValidators.required],
-            price: [null, CustomValidators.required]
+            price: [null, CustomValidators.required],
+            image_url: [null]
         });
+    }
+
+    public onFileSelected(event: Event): void {
+        const file = (event.target as HTMLInputElement)?.files?.[0];
+        if (file) {
+            this.selectedFile = file;
+        }
     }
 
     public close(): void {
         this.dialogRef.close();
     }
 
-    public save() {
-        if (this.formGroup.valid) {
-            const cupcake = this.formGroup.value;
-            this.http.post(this.urlCupcake, cupcake).subscribe({
-                next: () => {
-                    this.toast.success("Sucesso", "Cupcake adicionado com sucesso!");
-                    this.cupcakeService.triggerRefreshList();
-                    this.dialogRef.close(true);
-                },
-                error: (error) => {
-                    console.error('Erro ao criar usuário:', error);
-                }
-            });
+    save(): void {
+        if (!this.formGroup.valid || !this.selectedFile) {
+            return;
         }
-    }
+        const formData = new FormData();
+        formData.append('name', this.formGroup.get('name')?.value);
+        formData.append('price', this.formGroup.get('price')?.value);
+        formData.append('image', this.selectedFile);
 
+        this.http.post('http://localhost:8000/cupcakes', formData).subscribe({
+            next: () => {
+                this.toast.success("Sucesso", "Cupcake adicionado com sucesso!");
+                this.cupcakeService.triggerRefreshList();
+                this.dialogRef.close(true);
+            },
+            error: (error) => {
+                console.error('Erro ao criar cupcake:', error);
+            }
+        });
+
+    }
 }

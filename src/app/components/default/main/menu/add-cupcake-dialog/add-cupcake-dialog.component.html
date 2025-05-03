@@ -8,15 +8,26 @@
 <mat-dialog-content>
     <form [formGroup]="formGroup">
         <div fxLayout="column" fxLayoutAlign="space-evenly stretch" fxLayoutGap="16px">
+            <div fxFlex>
+                <label for="imageUpload">Imagem do cupcake</label><br>
+                <input id="imageUpload" type="file" (change)="onFileSelected($event)" accept="image/*">
+            </div>
+
             <mat-form-field fxFlex>
                 <mat-label>Nome</mat-label>
                 <input matInput type="text" formControlName="name" required>
-                <mat-error validator></mat-error>
+                <mat-error *ngIf="formGroup.get('name')?.hasError('required')">
+                    Campo obrigatório
+                </mat-error>
             </mat-form-field>
+
+
             <mat-form-field fxFlex>
                 <mat-label>Preço</mat-label>
                 <input matInput type="text" formControlName="price" [maxLength]="64" required mask="separator.2" thousandSeparator="." decimalMarker="," prefix="R$ ">
-                <mat-error validator></mat-error>
+                <mat-error *ngIf="formGroup.get('price')?.hasError('required')">
+                    Campo obrigatório
+                </mat-error>
             </mat-form-field>
         </div>
     </form>

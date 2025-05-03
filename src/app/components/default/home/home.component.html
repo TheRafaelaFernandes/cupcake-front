@@ -7,7 +7,7 @@
         <div *ngIf="cupcakesList?.length > 0; else noItems" class="module-list">
             <a *ngFor="let cupcake of cupcakesList" class="module mat-elevation-z4">
                 <div>
-                    <img src="../../../../assets/images/cupcake.jpg" width="200px" alt="">
+                    <img [src]="'http://localhost:8000' + cupcake?.image_url" width="200px" alt="{{ cupcake.name }}" width="200" height="200">
                     <h3>{{ cupcake["name"] }}</h3>
                     <h4>Preço : {{ cupcake["price"] | currency:'BRL':'symbol':'1.2-2' }}</h4>
                 </div>
@@ -17,6 +17,7 @@
                     </button>
                     <mat-icon *ngIf="!cupcake?.['is_favorite'] && !user?.['superuser']" (click)="addFavorite(cupcake, false)" matTooltip="Adicionar em favoritos">favorite_border</mat-icon>
                     <mat-icon *ngIf="cupcake?.['is_favorite'] && !user?.['superuser']" (click)="addFavorite(cupcake, true)" matTooltip="Remover de favoritos">favorite</mat-icon>
+                    <mat-icon *ngIf="user?.['superuser']" (click)="deleteCupcake(cupcake)" matTooltip="Remover cupcake">delete</mat-icon>
                 </div>
             </a>
         </div>
