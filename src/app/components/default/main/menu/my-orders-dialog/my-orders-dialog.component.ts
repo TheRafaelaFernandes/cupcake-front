@@ -4,7 +4,7 @@ import {MAT_DIALOG_DATA, MatDialogRef} from "@angular/material/dialog";
 import {URLS} from "../../../../../app/app.urls";
 import {environment} from "../../../../../../environments/environment";
 import {AuthService} from "../../../../../services/auth.service";
-import {User} from "../../../../../models/account/user";
+import {Customer} from "../../../../../models/account/customer";
 
 
 @Component({
@@ -12,9 +12,9 @@ import {User} from "../../../../../models/account/user";
     templateUrl: "./my-orders-dialog.component.html",
     styleUrls: ["./my-orders-dialog.component.scss"]
 })
-export class MyOrdersDialogComponent extends BaseComponent<User> implements OnInit {
+export class MyOrdersDialogComponent extends BaseComponent<Customer> implements OnInit {
 
-    public object: User = new User();
+    public object: Customer = new Customer();
     private readonly urlBase: string;
     private readonly urlCupcakeOrder: string;
     public orders: any[] = [];
@@ -23,7 +23,7 @@ export class MyOrdersDialogComponent extends BaseComponent<User> implements OnIn
                 public injector: Injector,
                 public authService: AuthService,
                 @Inject(MAT_DIALOG_DATA) public data: any) {
-        super(injector, {endpoint: URLS.USER});
+        super(injector, {endpoint: URLS.CUSTOMER});
         this.urlBase = environment.urlBase;
         this.urlCupcakeOrder = `${this.urlBase}${URLS.CUPCAKE_ORDER}`;
     }

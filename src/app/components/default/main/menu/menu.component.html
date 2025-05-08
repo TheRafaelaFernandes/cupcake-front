@@ -18,4 +18,8 @@
         <img class="click" ngSrc="assets/icons/cupcake%20-add.svg" alt="" height="25" width="30">
         <span>Add cupcake</span>
     </div>
+    <div fxFlex fxLayout="row" fxLayoutAlign="space-evenly stretch" class="item" (click)="openDialogEditCustomer()" *ngIf="!user?.['superuser']">
+        <mat-icon>account_circle</mat-icon>
+        <span>Editar dados</span>
+    </div>
 </div>

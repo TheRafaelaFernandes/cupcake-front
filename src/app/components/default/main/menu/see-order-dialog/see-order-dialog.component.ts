@@ -1,6 +1,6 @@
 import {Component, Inject, Injector, OnInit} from "@angular/core";
 import {BaseComponent} from "../../../../base.component";
-import {User} from "../../../../../models/account/user";
+import {Customer} from "../../../../../models/account/customer";
 import {MAT_DIALOG_DATA, MatDialogRef} from "@angular/material/dialog";
 import {URLS} from "../../../../../app/app.urls";
 import {environment} from "../../../../../../environments/environment";
@@ -12,18 +12,15 @@ import {AuthService} from "../../../../../services/auth.service";
     templateUrl: "./see-order-dialog.component.html",
     styleUrls: ["./see-order-dialog.component.scss"]
 })
-export class SeeOrderDialogComponent extends BaseComponent<User> implements OnInit {
+export class SeeOrderDialogComponent extends BaseComponent<Customer> implements OnInit {
 
-    public object: User = new User();
+    public object: Customer = new Customer();
     public cartItems: any[] = [];
     private readonly urlBase: string;
     private readonly urlOrder: string;
 
-    constructor(public dialogRef: MatDialogRef<SeeOrderDialogComponent>,
-                public injector: Injector,
-                public authService: AuthService,
-                @Inject(MAT_DIALOG_DATA) public data: any) {
-        super(injector, {endpoint: URLS.USER});
+    constructor(public dialogRef: MatDialogRef<SeeOrderDialogComponent>, public injector: Injector, public authService: AuthService, @Inject(MAT_DIALOG_DATA) public data: any) {
+        super(injector, {endpoint: URLS.CUSTOMER});
         this.urlBase = environment.urlBase;
         this.urlOrder = `${this.urlBase}${URLS.ORDER}`;
     }

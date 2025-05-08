@@ -12,6 +12,7 @@ import {AuthService} from "../../../../services/auth.service";
 import {AddCupcakeDialogComponent} from "./add-cupcake-dialog/add-cupcake-dialog.component";
 import {MyOrdersDialogComponent} from "./my-orders-dialog/my-orders-dialog.component";
 import {MyFavoritesDialogComponent} from "./my-favorites-dialog/my-favorites-dialog.component";
+import {EditCustomerDialogComponent} from "./edit-customer-dialog/edit-customer-dialog.component";
 
 @Component({
     selector: "app-menu",
@@ -69,6 +70,20 @@ export class MenuComponent implements OnInit {
 
     public openDialogAddCupcake() {
         const dialogRef = this.dialog.open(AddCupcakeDialogComponent, {
+                width: "45%",
+                height: "autoHeight",
+                disableClose: true
+            }
+        );
+        dialogRef.afterClosed()
+            .pipe(takeUntil(this.unsubscribe))
+            .subscribe(response => {
+                console.log(response)
+            });
+    }
+
+    public openDialogEditCustomer() {
+        const dialogRef = this.dialog.open(EditCustomerDialogComponent, {
                 width: "45%",
                 height: "autoHeight",
                 disableClose: true

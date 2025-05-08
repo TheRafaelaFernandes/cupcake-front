@@ -3,7 +3,7 @@ import {CustomValidators} from "../../../utilities/validator/custom-validators";
 import {ActivatedRoute, Router} from "@angular/router";
 import {FormBuilder, FormGroup} from "@angular/forms";
 import {take, takeUntil} from "rxjs/operators";
-import {User} from "../../../models/account/user";
+import {Customer} from "../../../models/account/customer";
 import {ToastService} from "../../../services/toast.service";
 import {HttpClient} from "@angular/common/http";
 import {URLS} from "../../../app/app.urls";
@@ -52,7 +52,7 @@ export class LoginComponent implements OnInit {
     }
 
     public login(): void {
-        const user = new User();
+        const user = new Customer();
         user.username = this.v.username.toString();
         user.password = this.v.password.toString();
         this.message = "processing";

@@ -1,6 +1,6 @@
 import {Component, Inject, Injector, OnInit} from "@angular/core";
 import {MAT_DIALOG_DATA, MatDialogRef} from "@angular/material/dialog";
-import {User} from "../../../../models/account/user";
+import {Customer} from "../../../../models/account/customer";
 import {BaseComponent} from "../../../base.component";
 import {URLS} from "../../../../app/app.urls";
 import {CustomValidators} from "../../../../utilities/validator/custom-validators";
@@ -11,16 +11,14 @@ import {environment} from "../../../../../environments/environment";
     templateUrl: "./create-user-dialog.component.html",
     styleUrls: ["./create-user-dialog.component.scss"]
 })
-export class CreateUserDialogComponent extends BaseComponent<User> implements OnInit {
+export class CreateUserDialogComponent extends BaseComponent<Customer> implements OnInit {
 
-    public object: User = new User();
+    public object: Customer = new Customer();
     private readonly urlBase: string;
     private readonly urlCustomer: string;
 
-    constructor(public dialogRef: MatDialogRef<CreateUserDialogComponent>,
-                public injector: Injector,
-                @Inject(MAT_DIALOG_DATA) public data: any) {
-        super(injector, {endpoint: URLS.USER});
+    constructor(public dialogRef: MatDialogRef<CreateUserDialogComponent>, public injector: Injector, @Inject(MAT_DIALOG_DATA) public data: any) {
+        super(injector, {endpoint: URLS.CUSTOMER});
         this.urlBase = environment.urlBase;
         this.urlCustomer = `${this.urlBase}${URLS.CUSTOMER}`;
     }
@@ -31,6 +29,11 @@ export class CreateUserDialogComponent extends BaseComponent<User> implements On
             username: [null, CustomValidators.required],
             password: [null, CustomValidators.required],
             email: [null, CustomValidators.email],
+            street: [null, CustomValidators.required],
+            number: [null, CustomValidators.required],
+            neighborhood: [null, CustomValidators.required],
+            city: [null, CustomValidators.required],
+            zip_code: [null, CustomValidators.required],
         });
     }
 

@@ -28,6 +28,7 @@ import {MyFavoritesDialogComponent} from "./components/default/main/menu/my-favo
 import {TOAST_OPTIONS} from "./app/app.constant";
 import {AuthInterceptor} from "./utilities/auth.interceptor";
 import {MAT_FORM_FIELD_DEFAULT_OPTIONS} from "@angular/material/form-field";
+import {EditCustomerDialogComponent} from "./components/default/main/menu/edit-customer-dialog/edit-customer-dialog.component";
 
 register();
 
@@ -46,7 +47,8 @@ const maskConfig: Partial<IConfig> = {
         SeeOrderDialogComponent,
         AddCupcakeDialogComponent,
         MyOrdersDialogComponent,
-        MyFavoritesDialogComponent
+        MyFavoritesDialogComponent,
+        EditCustomerDialogComponent
     ],
     imports: [
         BrowserModule,
